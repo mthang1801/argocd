@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "nodejs-concept.fullname" . }}
+  name: {{ include "nodejs-concepts.fullname" . }}
   labels:
-    {{- include "nodejs-concept.labels" . | nindent 4 }}
+    {{- include "nodejs-concepts.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "nodejs-concept.selectorLabels" . | nindent 4 }}
+    {{- include "nodejs-concepts.selectorLabels" . | nindent 4 }}

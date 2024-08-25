@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "nodejs-concept.name" -}}
+{{- define "nodejs-concepts.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "nodejs-concept.fullname" -}}
+{{- define "nodejs-concepts.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "nodejs-concept.chart" -}}
+{{- define "nodejs-concepts.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "nodejs-concept.labels" -}}
-helm.sh/chart: {{ include "nodejs-concept.chart" . }}
-{{ include "nodejs-concept.selectorLabels" . }}
+{{- define "nodejs-concepts.labels" -}}
+helm.sh/chart: {{ include "nodejs-concepts.chart" . }}
+{{ include "nodejs-concepts.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "nodejs-concept.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "nodejs-concept.name" . }}
+{{- define "nodejs-concepts.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "nodejs-concepts.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "nodejs-concept.serviceAccountName" -}}
+{{- define "nodejs-concepts.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "nodejs-concept.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "nodejs-concepts.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

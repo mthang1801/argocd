@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "nodejs-concept.fullname" . }}
+  name: {{ include "nodejs-concepts.fullname" . }}
   labels:
-    {{- include "nodejs-concept.labels" . | nindent 4 }}
+    {{- include "nodejs-concepts.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "nodejs-concept.selectorLabels" . | nindent 6 }}
+      {{- include "nodejs-concepts.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "nodejs-concept.labels" . | nindent 8 }}
+        {{- include "nodejs-concepts.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "nodejs-concept.serviceAccountName" . }}
+      serviceAccountName: {{ include "nodejs-concepts.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
