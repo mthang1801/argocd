@@ -3,14 +3,12 @@ kind: Application
 metadata:
   name: nodejs-concepts
   namespace: argocd 
-spec:
-  project: nodejs-concepts
+spec: 
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
+  project: nodejs-concepts
   source:
-    directory: 
-      recurse: true
     path: apps/nodejs-concepts
     targetRevision: main
     repoURL: https://github.com/mthang1801/argocd
